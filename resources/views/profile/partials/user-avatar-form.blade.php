@@ -4,12 +4,26 @@
             User Avatar
         </h2>
 
+         
+        <img width= "120" height="140" class=" rounded-full " src="{{ "/storage/$user->avatar" }}" alt="user avatar"/>
+
+
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             Add or update user avatar
         </p>
     </header>
      
-    <form method="post" action="/profile/avatar">
+
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+
+    <form method="post" action=" {{route('profile.avatar')}} " enctype="multipart/form-data">
+
+        @method('patch')
+        @csrf
 
         <div>
             <x-input-label for="avatar" :value="__('Avatar')" />
